@@ -1,6 +1,7 @@
 import cv2
 import mediapipe as mp
 from detectsets import detect_sets
+from detectbumps import detect_bumps
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_pose = mp.solutions.pose
@@ -36,13 +37,28 @@ with mp_pose.Pose(
     if results.pose_landmarks is not None:  
         landmarks = results.pose_landmarks.landmark
         if landmarks:
-            isSet = detect_sets(landmarks, image)
-            if isSet is not None:
-              font = cv2.FONT_HERSHEY_SIMPLEX
-              if isSet == "Try raising your arms above your head":
-                cv2.putText(image, isSet, (40, 600), font, 3, (0, 255, 0), 12, cv2.LINE_AA)
-              else:
-                cv2.putText(image, isSet, (900, 600), font, 3, (0, 255, 0), 12, cv2.LINE_AA)
+            if int(landmarks[21].x) == int(landmarks[22].x):
+              # Then it's a bump
+              isBump = detect_bumps(landmarks, image)
+              if isBump is not None:
+                font = cv2.FONT_HERSHEY_SIMPLEX
+                if isBump == "Try extending your arm outside":
+                  cv2.putText(image, isBump, (1000, 600), font, 3, (0, 255, 0), 12, cv2.LINE_AA) 
+                  # cv2.imshow('MediaPipe Pose', image)
+                  # continue
+                else:
+                  cv2.putText(image, isBump, (400, 600), font, 3, (0, 255, 0), 12, cv2.LINE_AA)
+                  # cv2.imshow('MediaPipe Pose', image)
+                  # continue
+          
+            else:
+              isSet = detect_sets(landmarks, image)
+              if isSet is not None:
+                font = cv2.FONT_HERSHEY_SIMPLEX
+                if isSet == "Try raising your arms above your head":
+                  cv2.putText(image, isSet, (40, 600), font, 3, (0, 255, 0), 12, cv2.LINE_AA)
+                else:
+                  cv2.putText(image, isSet, (900, 600), font, 3, (0, 255, 0), 12, cv2.LINE_AA)
 
     cv2.imshow('MediaPipe Pose', image)
             
