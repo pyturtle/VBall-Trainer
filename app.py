@@ -192,7 +192,7 @@ class Window(QMainWindow):
     def on_click(self):
         print("Clicked")
 
-        purple = "white"
+        purple = "#856FF8"
   
         self.setStyleSheet(f"background-color: {purple};")
 
