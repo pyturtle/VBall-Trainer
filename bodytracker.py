@@ -42,12 +42,12 @@ with mp_pose.Pose(
               isBump = detect_bumps(landmarks, image)
               if isBump is not None:
                 font = cv2.FONT_HERSHEY_SIMPLEX
-                if isBump == "Try extending your arm outside":
-                  cv2.putText(image, isBump, (1000, 600), font, 3, (0, 255, 0), 12, cv2.LINE_AA) 
+                if isBump == "Try to extend your arm out":
+                  cv2.putText(image, isBump, (400, 600), font, 3, (0, 255, 0), 12, cv2.LINE_AA) 
                   # cv2.imshow('MediaPipe Pose', image)
                   # continue
                 else:
-                  cv2.putText(image, isBump, (400, 600), font, 3, (0, 255, 0), 12, cv2.LINE_AA)
+                  cv2.putText(image, isBump, (900, 600), font, 3, (0, 255, 0), 12, cv2.LINE_AA)
                   # cv2.imshow('MediaPipe Pose', image)
                   # continue
           

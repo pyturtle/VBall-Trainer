@@ -23,7 +23,7 @@ def detect_bumps(landmarks, image):
 
         print(left_angle)
 
-        if left_angle >= 1.8 and right_angle >= 1.8:
+        if left_angle >= 1.8 and right_angle >= 1.8 and left_angle < 2.5 and right_angle < 2.5:
             return "Bump"
         if left_angle < 1.8 and right_angle < 1.8:
             return "Try to extend your arm out"
