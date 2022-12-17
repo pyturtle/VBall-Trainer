@@ -22,14 +22,17 @@ def detect_sets(landmarks, image):
         right_angle = math.acos((right_length_c**2 - right_length_a**2 - right_length_b**2) / (-2 * (right_length_a) * (right_length_b)))
 
         if left_angle > 1.6 and left_angle < 2.4 and right_angle > 1.6 and right_angle < 2.4 and landmarks[22].y < landmarks[14].y and landmarks[21].y < landmarks[13].y:
-            print("Set")
-            print(left_angle)
-            isSet = True
+            return "Set"
+            # print(left_angle)
+            # isSet = True
         elif landmarks[22].y > landmarks[14].y:
-            print("Try raising your arms above your head")
+            # print("Try raising your arms above your head")
+            return "Try raising your arms above your head"
         elif landmarks[21].y > landmarks[13].y:
-            print("Try raising your arms above your head")
-    if isSet:
-        return True
-    else:
-        return False
+            # print("Try raising your arms above your head")
+            return "Try raising your arms above your head"
+    # if isSet:
+    #     return True
+    # else:
+    #     return False
+    return None

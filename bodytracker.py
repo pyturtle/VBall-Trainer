@@ -6,7 +6,7 @@ mp_drawing_styles = mp.solutions.drawing_styles
 mp_pose = mp.solutions.pose
 
 # For webcam input:
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 with mp_pose.Pose(
     min_detection_confidence=0.5,
     min_tracking_confidence=0.5) as pose:
@@ -33,15 +33,18 @@ with mp_pose.Pose(
         mp_pose.POSE_CONNECTIONS,
         landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
     # Flip the image horizontally for a selfie-view display.
-    cv2.imshow('MediaPipe Pose', cv2.flip(image, 1))
     if results.pose_landmarks is not None:  
         landmarks = results.pose_landmarks.landmark
         if landmarks:
             isSet = detect_sets(landmarks, image)
-            # if isSet:
-            #     font = cv2.FONT_HERSHEY_SIMPLEX
-            #     cv2.putText(image, 'Set', (50, 50), font, 0.8, (0, 255, 0), 2, cv2.LINE_AA)
+            if isSet is not None:
+              font = cv2.FONT_HERSHEY_SIMPLEX
+              if isSet == "Try raising your arms above your head":
+                cv2.putText(image, isSet, (40, 600), font, 3, (0, 255, 0), 12, cv2.LINE_AA)
+              else:
+                cv2.putText(image, isSet, (900, 600), font, 3, (0, 255, 0), 12, cv2.LINE_AA)
 
+    cv2.imshow('MediaPipe Pose', image)
             
 
             
