@@ -37,7 +37,7 @@ with mp_pose.Pose(
     if results.pose_landmarks is not None:  
         landmarks = results.pose_landmarks.landmark
         if landmarks:
-            if int(landmarks[21].x) == int(landmarks[22].x):
+            if landmarks[15].y > landmarks[11].y and landmarks[16].y > landmarks[12].y:
               # Then it's a bump
               isBump = detect_bumps(landmarks, image)
               if isBump is not None:
